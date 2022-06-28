@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/','App\Http\Controllers\front\IndexController@index')->name('front.index');
+Route::get('kategori/{slug_kategori}/{slug_altkategori?}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
+Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_detay')->name('front.urun_detay');
+Route::get('sepet/','App\Http\Controllers\front\IndexController@sepet')->name('front.sepet');
+Route::get('odeme/','App\Http\Controllers\front\IndexController@odeme')->name('front.odeme');
+Route::get('siparisler/','App\Http\Controllers\front\IndexController@siparisler')->name('front.siparisler');
+Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
+Route::get('test','App\Http\Controllers\front\UrunController@index')->name('front.urunindex');
+Route::group(['prefix'=>'kullanici'],function(){
+Route::get('oturumac','App\Http\Controllers\front\KullaniciController@oturumac')->name('front.oturumac');
+Route::get('sifremiunuttum','App\Http\Controllers\front\KullaniciController@sifremiunuttum')->name('front.sifremiunuttum');
+Route::get('kaydol','App\Http\Controllers\front\KullaniciController@kaydol')->name('front.kaydol');
 });
+
