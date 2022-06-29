@@ -15,7 +15,11 @@ class urun extends Model
       }*/
       public function kategoriler(){
        
-        return $this->belongsToMany(urun::class, 'kategori_uruns', 'urun_id', 'kategori_id'); 
+        return $this->belongsToMany(kategori::class, 'kategori_uruns', 'urun_id', 'kategori_id'); 
       }
+      public function detay(){
+        return  $this->hasOne(urun_detay::class, 'urun_id', 'id');//user tablosu(model ) içersindeki id alanı post tablosu içerisindeki user ile ilişkilidir
+      }
+    
       
 }

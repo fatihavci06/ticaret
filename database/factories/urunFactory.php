@@ -18,7 +18,7 @@ class urunFactory extends Factory
         $urun=$this->faker->sentence(2);
         return [
             'slug' => $urun, // Laravel faker paketini direk kullanıyor, bir işlem yapmanıza gerek yok
-            'urun-adi' =>Str::slug($urun),
+            'urun_adi' =>Str::slug($urun),
             'aciklama' => $this->faker->text,
             'fiyat' => mt_rand( 0, 1100 ) / 10
             

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KategoriTableSeeder::class, //bu yapılmalı
            urunSeed::class,
+           Urun2Seed::class,
 
          ]);
     }

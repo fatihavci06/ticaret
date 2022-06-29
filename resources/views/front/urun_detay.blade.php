@@ -5,8 +5,10 @@
 <div class="container">
         <ol class="breadcrumb">
             <li><a href="{{route('front.index')}}">Anasayfa</a></li>
-            <li><a href="#">Kategori</a></li>
-            <li class="active">Kategori</li>
+            @foreach($urun->kategoriler as $ur)
+            <li><a href="#">{{$ur->kategori_adi}}</a></li>
+            @endforeach
+            
         </ol>
         <div class="bg-content">
             <div class="row">

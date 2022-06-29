@@ -19,7 +19,7 @@ class UrunController extends Controller
         
         
         
-        return number_format(mt_rand(1250,909099)/123, 2, '.', '');;
+        return $urunler = urun::pluck('id')->random(10)->all();
     }
 
     /**
@@ -30,7 +30,7 @@ class UrunController extends Controller
     public function urun_detay($slug)
     {
         //
-        $urun=urun::where('slug',$slug)->firstOrFail();
+        $urun=urun::with('kategoriler')->where('slug',$slug)->firstOrFail();
         
         return view('front.urun_detay',['urun'=>$urun]);
     }

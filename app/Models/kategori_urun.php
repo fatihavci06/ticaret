@@ -12,6 +12,9 @@ class kategori_urun extends Model
     public function urun_bilgisi(){
         return  $this->hasOne(urun::class, 'id', 'urun_id');  
       }
+      public function kategori_bilgisi(){
+        return  $this->hasOne(kategori::class, 'id', 'kategori_id');  
+      }
      /* public function kategori_bilgisi(){
         return  $this->hasOne(kategori::class, 'id', 'kategori_id');  
      }*/
