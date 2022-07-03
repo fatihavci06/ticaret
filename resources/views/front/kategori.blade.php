@@ -1,13 +1,13 @@
 @extends('layouts.master') 
 @section('title',$kategoriadi)
 @section('content')
-@php
-    $anakategori_slug=Request::segment(2)
-@endphp
+
 <div class="container">
          <ol class="breadcrumb">
             <li><a href="{{route('front.index')}}">Anasayfa</a></li>
-            <li><a href="{{route('front.kategori',['slug_kategori'=>$anakategori_slug])}}">{{$anakategori}}</a></li>
+            @if($anakategori!='')
+            <li class="active"><a href="{{route('front.kategori',['slug_kategori'=>$anakategori_slug])}}">{{$anakategori}}</a></li>
+            @endif
             <li class="active">{{$kategoriadi}}</li>
         </ol>
         <div class="row">
@@ -20,7 +20,7 @@
                         <h3>Alt Kategoriler {{$anakategori}}</h3>
                         <div class="list-group categories">
                             @foreach($altkategoriler as $a)
-                            <a href="{{route('front.kategori',['slug_kategori'=>$anakategori_slug,'slug_altkategori'=>$a->slug])}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$a->kategori_adi}}</a>
+                            <a href="{{route('front.kategori',['slug_kategori'=>$a->slug])}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$a->kategori_adi}}</a>
                             @endforeach
                             
                         </div>
@@ -49,7 +49,7 @@
                             <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
                         </div>
                         @endforeach
-                        
+                        <div class="col-sm-12"> {{ $urunler->links() }}</div>
                     </div>
                 </div>
             </div>

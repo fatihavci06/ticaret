@@ -38,8 +38,25 @@ class KategoriController extends Controller
         }
         return $temp_array;
     }
-    public function kategori($slug_kategori,$slug_altkategori='')
+    public function kategori($slug_kategori)
     {
+
+        
+        $kategori=kategori::where('slug',$slug_kategori)->firstOrFail();
+        if($kategori->ust_id!=''){
+            $a=$kategori::where('id',$kategori->ust_id)->firstOrFail();
+            $anakategori=$a->kategori_adi;
+            $anakategori_slug=$a->slug;
+        }
+        else{
+            $anakategori='';
+            $anakategori_slug='';
+        }
+        $urunlist= $kategori->urunler()->paginate(2);
+        
+        $altkategoriler=kategori::where('ust_id',$kategori->id)->get();
+       
+        return view('front.kategori',['altkategoriler'=>$altkategoriler,'anakategori_slug'=>$anakategori_slug,'kategoriadi'=>$kategori->kategori_adi ,'urunler'=>$urunlist ,'anakategori'=>$anakategori]);
      
         $altkategorivarmi=kategori::with('kat')->select('id','kategori_adi','ust_id')->where('slug',$slug_kategori)->firstorFail();
         $altkategorisayi=$altkategorivarmi->kat->count();
@@ -49,12 +66,12 @@ class KategoriController extends Controller
         $urunlist=$kategori->urunler;
         
         $anakategori=kategori::select('kategori_adi')->where('id',$kategori->ust_id)->first();
-        $altkategoriler=kategori::where('ust_id',$kategori->id)->paginate();
+        $altkategoriler=kategori::where('ust_id',$kategori->id)->get();
         $kategori_ad=$kategori->kategori_adi;
        }
        else if($altkategorisayi==0){
         $data=kategori::whereSlug($slug_kategori)->firstOrFail();
-        $urunler=kategori_urun::with('urun_bilgisi')->where('kategori_id',$data->id)->paginate();
+        $urunler=kategori_urun::with('urun_bilgisi')->where('kategori_id',$data->id)->get();
         $urunlist = array();
         
         foreach($urunler  as $u){

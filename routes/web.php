@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/','App\Http\Controllers\front\IndexController@index')->name('front.index');
-Route::get('kategori/{slug_kategori}/{slug_altkategori?}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
+Route::get('kategori/{slug_kategori}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
 Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_detay')->name('front.urun_detay');
 Route::get('sepet/','App\Http\Controllers\front\IndexController@sepet')->name('front.sepet');
 Route::get('odeme/','App\Http\Controllers\front\IndexController@odeme')->name('front.odeme');
