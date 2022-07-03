@@ -22,15 +22,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{route('front.index')}}">
                     <img src="{{asset('Frontend/')}}/img/logo.png">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left" method="post" action="{{route('front.arama')}}" >
+                    @csrf
                     <div class="input-group">
-                        <input type="text" id="navbar-search" class="form-control" placeholder="Ara">
+                        <input type="text" id="navbar-search" name="aranan" class="form-control" value="{{old('aranan')}}" placeholder="Ara">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default">
                                 <i class="fa fa-search"></i>

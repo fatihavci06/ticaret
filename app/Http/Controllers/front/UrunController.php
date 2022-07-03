@@ -42,9 +42,13 @@ class UrunController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function search(Request $request)
     {
         //
+        $aranan=$request->aranan;
+        $data=urun::where('urun_adi','like','%'.$aranan.'%')->orWhere('aciklama','like','%'.$aranan.'%')->paginate(2);
+        $request->flash();// sessiona attı ve front endde {{old('aranan')}} ile inputa son değerin yazmasını sağladık
+        return view('front.arama',['urunler'=>$data]);
     }
 
     /**

@@ -22,6 +22,8 @@ Route::get('odeme/','App\Http\Controllers\front\IndexController@odeme')->name('f
 Route::get('siparisler/','App\Http\Controllers\front\IndexController@siparisler')->name('front.siparisler');
 Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
 Route::get('test','App\Http\Controllers\front\UrunController@index')->name('front.urunindex');
+Route::post('arama','App\Http\Controllers\front\UrunController@search')->name('front.arama');
+Route::get('arama','App\Http\Controllers\front\UrunController@search')->name('front.arama.get');
 Route::group(['prefix'=>'kullanici'],function(){
 Route::get('oturumac','App\Http\Controllers\front\KullaniciController@oturumac')->name('front.oturumac');
 Route::get('sifremiunuttum','App\Http\Controllers\front\KullaniciController@sifremiunuttum')->name('front.sifremiunuttum');

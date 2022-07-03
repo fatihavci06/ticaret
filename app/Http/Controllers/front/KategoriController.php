@@ -49,12 +49,12 @@ class KategoriController extends Controller
         $urunlist=$kategori->urunler;
         
         $anakategori=kategori::select('kategori_adi')->where('id',$kategori->ust_id)->first();
-        $altkategoriler=kategori::where('ust_id',$kategori->id)->get();
+        $altkategoriler=kategori::where('ust_id',$kategori->id)->paginate();
         $kategori_ad=$kategori->kategori_adi;
        }
        else if($altkategorisayi==0){
         $data=kategori::whereSlug($slug_kategori)->firstOrFail();
-        $urunler=kategori_urun::with('urun_bilgisi')->where('kategori_id',$data->id)->get();
+        $urunler=kategori_urun::with('urun_bilgisi')->where('kategori_id',$data->id)->paginate();
         $urunlist = array();
         
         foreach($urunler  as $u){
