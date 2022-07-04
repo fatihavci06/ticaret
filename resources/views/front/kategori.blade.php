@@ -34,8 +34,8 @@
             <div class="col-md-9">
                 <div class="products bg-content">
                     Sırala
-                    <a href="#" class="btn btn-default">Çok Satanlar</a>
-                    <a href="#" class="btn btn-default">Yeni Ürünler</a>
+                    <a href="?order=coksatan&s=a" class="btn btn-default">Çok Satanlar</a>
+                    <a href="?order=yeni" class="btn btn-default">Yeni Ürünler</a>
                     <hr>
                     <div class="row">
                         @if(count($urunler)==0)
@@ -49,7 +49,13 @@
                             <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
                         </div>
                         @endforeach
-                        <div class="col-sm-12"> {{ $urunler->links() }}</div>
+                        <div class="col-sm-12"> 
+                         @if(request()->has('order')) 
+                         {{ $urunler->appends(['order'=>request()->get('order')])->links() }}
+                        @else
+                        {{ $urunler->links() }}
+                        @endif
+                    </div>
                     </div>
                 </div>
             </div>

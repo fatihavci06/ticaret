@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\kategori;
+use App\Models\urun;
 use App\Models\kategori_urun;
 
 class KategoriController extends Controller
@@ -38,10 +39,10 @@ class KategoriController extends Controller
         }
         return $temp_array;
     }
-    public function kategori($slug_kategori)
+    public function kategori($slug_kategori,Request $request)
     {
-
-        
+      
+              
         $kategori=kategori::where('slug',$slug_kategori)->firstOrFail();
         if($kategori->ust_id!=''){
             $a=$kategori::where('id',$kategori->ust_id)->firstOrFail();
@@ -52,13 +53,29 @@ class KategoriController extends Controller
             $anakategori='';
             $anakategori_slug='';
         }
-        $urunlist= $kategori->urunler()->paginate(2);
+        if($request->order=='coksatan'){
+            $urunlist=urun::join('urun_detays','urun_detays.urun_id','uruns.id')
+            ->join('kategori_uruns','kategori_uruns.urun_id','uruns.id')
+            ->join('kategoris','kategoris.id','kategori_uruns.kategori_id')
+            ->where('urun_detays.goster_cok_satan',1)->where('kategoris.slug',$slug_kategori)->orderByDesc('urun_detays.updated_at')->paginate(1);
+            
+            
+        }
+        elseif($request->order=='yeni'){
+            $urunlist=$kategori->urunler()->orderByDesc('updated_at')->paginate(2);
+            
+           
+        } 
+        else{
+            $urunlist= $kategori->urunler()->paginate(2);
+        } 
+        
         
         $altkategoriler=kategori::where('ust_id',$kategori->id)->get();
        
         return view('front.kategori',['altkategoriler'=>$altkategoriler,'anakategori_slug'=>$anakategori_slug,'kategoriadi'=>$kategori->kategori_adi ,'urunler'=>$urunlist ,'anakategori'=>$anakategori]);
      
-        $altkategorivarmi=kategori::with('kat')->select('id','kategori_adi','ust_id')->where('slug',$slug_kategori)->firstorFail();
+       /* $altkategorivarmi=kategori::with('kat')->select('id','kategori_adi','ust_id')->where('slug',$slug_kategori)->firstorFail();
         $altkategorisayi=$altkategorivarmi->kat->count();
         
        if($slug_altkategori!=''){
@@ -107,7 +124,7 @@ class KategoriController extends Controller
        
        
         return view('front.kategori',['altkategoriler'=>$altkategoriler,'kategoriadi'=>$kategori_ad,'urunler'=>$urunlist ,'anakategori'=>$anakategori->kategori_adi ]);
-    }
+    */}
 
     /**
      * Show the form for creating a new resource.
