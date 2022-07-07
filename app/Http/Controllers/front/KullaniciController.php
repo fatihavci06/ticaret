@@ -4,6 +4,10 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\kullanici;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class KullaniciController extends Controller
 {
@@ -42,7 +46,30 @@ class KullaniciController extends Controller
     public function kaydol()
     {
         //
+       
         return view('front.kaydol');
+    }
+    public function kayit(Request $request)
+    {
+        //
+        $request->validate([
+            'adsoyad'=>'required|min:5|max:60',
+            'email'=>'required|email|unique:kullanicis',
+            'sifre'=>'required|confirmed|min:5|max:15',
+            
+           
+            
+           ]);
+        $kullanici=kullanici::create([
+            'adsoyad'=>$request->adsoyad,
+            'email'=>$request->email,
+            'sifre'=>Hash::make($request->sifre),
+            'aktivasyon_anahtari'=>Str::random(60),
+            'aktif_mi'=>0
+
+        ]);
+        Auth::login($kullanici);
+        return redirect()->route('front.index');
     }
 
     /**

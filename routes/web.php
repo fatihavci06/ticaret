@@ -28,5 +28,6 @@ Route::group(['prefix'=>'kullanici'],function(){
 Route::get('oturumac','App\Http\Controllers\front\KullaniciController@oturumac')->name('front.oturumac');
 Route::get('sifremiunuttum','App\Http\Controllers\front\KullaniciController@sifremiunuttum')->name('front.sifremiunuttum');
 Route::get('kaydol','App\Http\Controllers\front\KullaniciController@kaydol')->name('front.kaydol');
+Route::post('kaydol','App\Http\Controllers\front\KullaniciController@kayit')->name('front.kaydolpost');
 });
 
