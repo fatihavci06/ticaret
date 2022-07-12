@@ -30,4 +30,13 @@ Route::get('sifremiunuttum','App\Http\Controllers\front\KullaniciController@sifr
 Route::get('kaydol','App\Http\Controllers\front\KullaniciController@kaydol')->name('front.kaydol');
 Route::post('kaydol','App\Http\Controllers\front\KullaniciController@kayit')->name('front.kaydolpost');
 });
+Route::get('aktiflestir/{aktivasyon_kodu}','App\Http\Controllers\front\KullaniciController@aktivasyon')->name('front.aktivasyon');
+Route::get('test/mail',function(){
+        $kullanici=App\Models\kullanici::findOrFail(1);
+        return new App\Mail\KullaniciKayitMail($kullanici);
+});
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

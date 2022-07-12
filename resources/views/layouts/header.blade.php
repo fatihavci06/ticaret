@@ -42,16 +42,16 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><i class="fa fa-shopping-cart"></i> Sepet <span class="badge badge-theme">5</span></a></li>
                     @guest
-                    <li><a href="{{route('front.oturumac')}}">Oturum Aç</a></li>
+                    <li><a href="{{route('login')}}">Oturum Aç</a></li>
                     <li><a href="{{route('front.kaydol')}}">Kaydol</a></li>
                     @endguest
                     @auth
-                    <li class="dropdown">
+                    <li class="dropdown text-center">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Profil <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Siparişlerim</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Çıkış</a></li>
+                            <form action="logout" method="post" >@csrf<li><button class="d-inline btn btn-link p-0">Çıkış</button></li></form>
                         </ul>
                     </li>
                     @endauth

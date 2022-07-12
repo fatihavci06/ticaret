@@ -19,7 +19,7 @@ class kullanici extends Authenticatable
      * @var array<int, string>
      */
     protected $table='kullanicis';
-    use SoftDeletes;
+    
     protected $fillable = [
         'adsoyad',
         'email',

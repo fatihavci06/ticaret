@@ -72,6 +72,9 @@
                                     </button>
                                 </div>
                             </div>
+                            @if(session('mesaj'))
+                            <div class="alert alert-success">{{session('mesaj')}}</div>
+                            @endif
                         </form>
                     </div>
                 </div>
