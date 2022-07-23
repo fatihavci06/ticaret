@@ -8,13 +8,7 @@
         </div>
 </div>
 @endif
-@if(session('success')==0)
-<div class="container">
-        <div class="alert alert-success">
-            {{session('mesaj')}}
-        </div>
-</div>
-@endif
+
     <div class="container">
         <div class="row">
             <div class="col-md-3">

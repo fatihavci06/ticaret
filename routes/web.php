@@ -17,10 +17,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','App\Http\Controllers\front\IndexController@index')->name('front.index');
 Route::get('kategori/{slug_kategori}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
 Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_detay')->name('front.urun_detay');
-Route::get('sepet/','App\Http\Controllers\front\IndexController@sepet')->name('front.sepet');
-Route::get('odeme/','App\Http\Controllers\front\IndexController@odeme')->name('front.odeme');
-Route::get('siparisler/','App\Http\Controllers\front\IndexController@siparisler')->name('front.siparisler');
-Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
+
+
+Route::group(['middleware'=>'auth'],function(){
+        Route::get('odeme/','App\Http\Controllers\front\IndexController@odeme')->name('front.odeme');
+        Route::get('siparisler/','App\Http\Controllers\front\IndexController@siparisler')->name('front.siparisler');
+        Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
+       
+});
+Route::group(['prefix'=>'sepet','middleware'=>'auth'],function(){
+        
+        Route::get('/','App\Http\Controllers\front\SepetController@index')->name('front.sepet');
+        Route::post('/ekle','App\Http\Controllers\front\SepetController@ekle')->name('front.sepete_ekle');
+        Route::post('/kaldir/{rowID}','App\Http\Controllers\front\SepetController@kaldir')->name('front.sepet_kaldir');
+        Route::post('/bosalt','App\Http\Controllers\front\SepetController@bosalt')->name('front.sepet_bosalt');
+});
+
+
+
 Route::get('test','App\Http\Controllers\front\UrunController@index')->name('front.urunindex');
 Route::post('arama','App\Http\Controllers\front\UrunController@search')->name('front.arama');
 Route::get('arama','App\Http\Controllers\front\UrunController@search')->name('front.arama.get');
