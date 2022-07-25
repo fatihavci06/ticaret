@@ -17,7 +17,20 @@ class SepetController extends Controller
     {
         
       $sepetim= Cart::content();
+      
         return view('front.sepet',['sepet'=>$sepetim]);
+    }
+    public function guncelle($id,Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'adet' => 'required|numeric|between:1,5'
+               
+           ]);
+           if ($validator->fails())
+         {
+        return response()->json(['errors'=>'1-5 arası stok girebilirsiniz']);
+        }
+      Cart::update($id,$request->adet);
     }
     public function ekle(Request $request)
     {

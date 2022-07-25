@@ -11,6 +11,7 @@
 <div class="container">
         <div class="bg-content">
             <h2>Sepet</h2>
+            <div class="alert alert-danger" style="display:none;" id="er"></div>
             @if(count(Cart::content())>0)
             <table class="table table-bordererd table-hover">
                 <tr>
@@ -26,9 +27,10 @@
                     <td> <img src="http://via.placeholder.com/120x100?text=UrunResmi"> <a href="{{route('front.urun_detay',['slug'=>$s->options->slug])}}">{{$s->name}}</a></td>
                     <td>{{$s->price}}</td>
                     <td>
-                        <a href="#" class="btn btn-xs btn-default">-</a>
-                        <span style="padding: 10px 20px">{{$s->qty}}</span>
-                        <a href="#" class="btn btn-xs btn-default">+</a>
+                        <a href="#" class="btn btn-xs btn-default urun-adet-azalt" data-id="{{$s->rowId}}" data-adet="{{$s->qty-1}}">-</a>
+                        <span style="padding: 10px 20px" >{{$s->qty}}</span>
+                        <a href="#" class="btn btn-xs btn-default urun-adet-arttır" data-id="{{$s->rowId}}" data-adet="{{$s->qty+1}}">+</a>
+                        <input type="hidden" data-id="{{$s->id}}" value="">
                     </td>
                     <td>{{$s->subtotal}}</td>
                     <td>
@@ -82,4 +84,63 @@
 
     
 
+@endsection
+@section('js')
+<script>
+   $( ".urun-adet-azalt, .urun-adet-arttır " ).click(function() {
+    $.ajaxSetup({
+
+headers: {
+
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+}
+
+});
+
+
+
+var id= $(this).attr('data-id');
+
+var adet=$(this).attr('data-adet');
+
+$.ajax({
+
+   type:'POST',
+
+  
+    url:"sepet/guncelle/"+id,
+
+   data:{adet:adet},
+
+   success:function(data){
+
+    if(data.errors){
+           		
+           		$('#er').show();
+           		
+				$('#er').html(data.errors);
+           	}
+           	else{
+                window.location.href="/sepet";
+             }
+
+     
+
+   }
+
+});
+
+
+
+
+
+
+    
+
+
+});
+
+    
+    </script>
 @endsection
