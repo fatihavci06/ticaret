@@ -30,8 +30,8 @@ Route::group(['prefix'=>'sepet','middleware'=>'auth'],function(){
         Route::get('/','App\Http\Controllers\front\SepetController@index')->name('front.sepet');
         Route::post('/guncelle/{id}','App\Http\Controllers\front\SepetController@guncelle')->name('front.sepet_guncelle');
         Route::post('/ekle','App\Http\Controllers\front\SepetController@ekle')->name('front.sepete_ekle');
-        Route::post('/kaldir/{rowID}','App\Http\Controllers\front\SepetController@kaldir')->name('front.sepet_kaldir');
-        Route::post('/bosalt','App\Http\Controllers\front\SepetController@bosalt')->name('front.sepet_bosalt');
+        Route::post('/kaldir/{rowID}/{kullanici_id}','App\Http\Controllers\front\SepetController@kaldir')->name('front.sepet_kaldir');
+        Route::post('/bosalt/{kullanici_id}','App\Http\Controllers\front\SepetController@bosalt')->name('front.sepet_bosalt');
 });
 
 

@@ -27,14 +27,14 @@
                     <td> <img src="http://via.placeholder.com/120x100?text=UrunResmi"> <a href="{{route('front.urun_detay',['slug'=>$s->options->slug])}}">{{$s->name}}</a></td>
                     <td>{{$s->price}}</td>
                     <td>
-                        <a href="#" class="btn btn-xs btn-default urun-adet-azalt" data-id="{{$s->rowId}}" data-adet="{{$s->qty-1}}">-</a>
+                        <a href="#" class="btn btn-xs btn-default urun-adet-azalt" data-id="{{$s->rowId}}" data-urun_id="{{$s->options->urun_id}}" data-adet="{{$s->qty-1}}">-</a>
                         <span style="padding: 10px 20px" >{{$s->qty}}</span>
-                        <a href="#" class="btn btn-xs btn-default urun-adet-arttır" data-id="{{$s->rowId}}" data-adet="{{$s->qty+1}}">+</a>
+                        <a href="#" class="btn btn-xs btn-default urun-adet-arttır" data-id="{{$s->rowId}}" data-urun_id="{{$s->options->urun_id}}" data-adet="{{$s->qty+1}}">+</a>
                         <input type="hidden" data-id="{{$s->id}}" value="">
                     </td>
                     <td>{{$s->subtotal}}</td>
                     <td>
-                        <form action="{{route('front.sepet_kaldir',['rowID'=>$s->rowId])}}" method="post">
+                        <form action="{{route('front.sepet_kaldir',['rowID'=>$s->rowId,'kullanici_id'=>auth()->id()])}}" method="post">
                             @csrf
                             <input type="submit" class="btn btn-danger btn-xs" value="Sil">
                         </form>
@@ -66,8 +66,8 @@
                 </tr>
             </table>
             <div>
-                
-                <form action="{{route('front.sepet_bosalt')}}" method="post">
+           
+                <form action="{{route('front.sepet_bosalt',['kullanici_id'=>auth()->id()])}}" method="post">
                     @csrf
                     <input type="submit" class="btn btn-info pull-left" value="Sepeti Boşalt">
                 </form>
@@ -103,7 +103,9 @@ headers: {
 var id= $(this).attr('data-id');
 
 var adet=$(this).attr('data-adet');
+var urun_id=$(this).attr('data-urun_id');
 
+var kullanici_id={{auth()->id()}};
 $.ajax({
 
    type:'POST',
@@ -111,7 +113,7 @@ $.ajax({
   
     url:"sepet/guncelle/"+id,
 
-   data:{adet:adet},
+   data:{adet:adet,kullanici_id:kullanici_id,urun_id:urun_id},
 
    success:function(data){
 
@@ -122,6 +124,7 @@ $.ajax({
 				$('#er').html(data.errors);
            	}
            	else{
+               
                 window.location.href="/sepet";
              }
 

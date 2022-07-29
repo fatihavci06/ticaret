@@ -15,12 +15,12 @@ class CreateSepetUrunsTable extends Migration
     {
         Schema::create('sepet_uruns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('sepet_id');
+            $table->unsignedInteger('kullanici_id');
             $table->unsignedInteger('urun_id');
             $table->integer('adet');
             $table->decimal('tutar',5,2);
             $table->text('durum',30);
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }
