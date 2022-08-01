@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sepet extends Model
+class KullaniciDetay extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    public function siparis(){
-        return  $this->hasOne(siparisler::class, 'sepet_id', 'id');
+
+    
+      public function kullanici(){
+        return  $this->belongsTo(User::class, 'id', 'kullanici_id');
       }
 }

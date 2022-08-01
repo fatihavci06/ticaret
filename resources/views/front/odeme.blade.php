@@ -9,6 +9,8 @@
             <div class="row">
                 <div class="col-md-5">
                     <h3>Ödeme Bilgileri</h3>
+                    <form action="{{route('front.odemeyap')}}" method="post">
+                        @csrf
                     <div class="form-group">
                         <label for="kartno">Kredi Kartı Numarası</label>
                         <input type="text" class="form-control kredikarti" id="kartno" name="cardnumber" style="font-size:20px;" required>
@@ -38,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <form>
+                    
                         <div class="form-group">
                             <div class="checkbox">
                                 <label><input type="checkbox" checked> Ön bilgilendirme formunu okudum ve kabul ediyorum.</label>
@@ -49,25 +51,47 @@
                                 <label><input type="checkbox" checked> Mesafeli satış sözleşmesini okudum ve kabul ediyorum.</label>
                             </div>
                         </div>
-                    </form>
+                    
                     <button type="submit" class="btn btn-success btn-lg">Ödeme Yap</button>
+                    
                 </div>
                 <div class="col-md-7">
                     <h4>Ödenecek Tutar</h4>
-                    <span class="price">18.92 <small>TL</small></span>
+                    <span class="price">{{ Cart::total() }} <small>TL</small></span>
 
-                    <h4>Kargo</h4>
-                    <span class="price">0 <small>TL</small></span>
+                    <h4>İletişim ve Fatura Bilgileri</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="adsoyad">Ad Soyad</label>
+                                <input type="text" class="form-control" name="adsoyad" id="adsoyad" value="{{ $kullanici_detay->name }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="adres">Adres </label>
+                                <input type="text" class="form-control" name="adres" id="adres" value="" required>
+                            </div>
+                        </div>
+                    </div>
 
-                    <h4>Teslimat Bilgileri</h4>
-                    <p>Teslimat Adresi </p>
-                    <a href="#">Değiştir</a>
-
-                    <h4>Kargo</h4>
-                    <p>Ücretsiz
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="telefon">Telefon</label>
+                                <input type="text" class="form-control telefon" name="telefon" id="telefon" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="ceptelefonu">Cep Telefonu</label>
+                                <input type="text" class="form-control telefon" name="ceptelefonu" id="ceptelefonu" value="" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            </form>
         </div>
     </div>
 

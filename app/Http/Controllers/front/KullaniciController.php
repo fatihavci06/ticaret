@@ -70,6 +70,7 @@ class KullaniciController extends Controller
         $kullanici->aktivation_code=Str::random(60);
         $kullanici->isAktive=0;
            $kullanici->save();
+            
         Mail::to($request->email)->send(new KullaniciKayitMail($kullanici) );
        
         return redirect()->back()->with(['mesaj'=>'Mail adresinize aktivasyon linki gönderildi']);

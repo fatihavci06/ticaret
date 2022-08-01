@@ -19,11 +19,12 @@ class SepetController extends Controller
     {
         
         Cart::destroy(); //sepeti boşalttık ve veritabanındaki verilerle sepeti doldurduk
-      $sepetim=SepetUrun::with('sepeturun')->where('kullanici_id',auth()->id())->get();
+     $sepetim=SepetUrun::with('sepeturun')->where('kullanici_id',auth()->id())->where('durum','bekleme')->get();
       foreach($sepetim as $s){
         Cart::add(['id'=>$s->id,'name'=>$s->sepeturun->urun_adi,'qty'=>$s->adet,'price'=>$s->sepeturun->fiyat,'weight'=>50,'options' => ['slug' => $s->sepeturun->slug,'urun_id'=>$s->sepeturun->id]]);
       }
       $sepetim=Cart::content();
+      Sepet::updateOrCreate(['kullanici_id'=>auth()->id()]);
         return view('front.sepet',['sepet'=>$sepetim]);
     }
     public function guncelle(Request $request,$id)

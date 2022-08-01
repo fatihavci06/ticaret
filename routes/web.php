@@ -20,7 +20,8 @@ Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_d
 
 
 Route::group(['middleware'=>'auth'],function(){
-        Route::get('odeme/','App\Http\Controllers\front\IndexController@odeme')->name('front.odeme');
+        Route::get('odeme/','App\Http\Controllers\front\OdemeController@index')->name('front.odeme');
+        Route::post('odemeyap/','App\Http\Controllers\front\OdemeController@odemeyap')->name('front.odemeyap');
         Route::get('siparisler/','App\Http\Controllers\front\IndexController@siparisler')->name('front.siparisler');
         Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
        

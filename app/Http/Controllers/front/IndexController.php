@@ -58,11 +58,7 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function odeme()
-    {
-        //
-        return view('front.odeme');
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
