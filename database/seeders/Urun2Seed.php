@@ -21,7 +21,7 @@ class Urun2Seed extends Seeder
     {
         //
         $faker=Faker::create(); 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        
         
         urun::truncate();
         urun_detay::truncate();
@@ -51,6 +51,6 @@ class Urun2Seed extends Seeder
             $kategori->urunler()->attach($urunler);//urunler relationuna yani kategori_uruns tablosuna yukarıda çektiğimiz idleri biz burada 10 adet ekledik toplam 10 satır olarak ekler.yani herbir kategoriye 10 ürün eklemiş olduk
         }
         
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Siparisler;
+use App\Models\SiparisUrun;
+use DB;
 class SiparisController extends Controller
 {
     /**
@@ -15,6 +17,16 @@ class SiparisController extends Controller
     public function index()
     {
         //
+       $data= Siparisler::where('sepet_id',auth()->id())->get();
+       
+        return view('front.siparisler',['siparisler'=>$data]);
+    }
+    public static  function sepeturunadet($siparis_id)
+    {
+       $adet=DB::table('siparis_uruns')
+        ->where('siparis_id', '=', $siparis_id)
+        ->sum('adet');
+        return $adet;
     }
 
     /**

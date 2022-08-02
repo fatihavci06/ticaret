@@ -13,4 +13,7 @@ class siparisler extends Model
     public function sepet(){
         return  $this->belongsTo(Sepet::class, 'id', 'sepet_id');
       }
+      public function siparisurun(){
+        return  $this->hasMany(SiparisUrun::class, 'siparis_id', 'id');
+      }
 }

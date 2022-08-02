@@ -40,7 +40,7 @@ class OdemeController extends Controller
         
       $siparis=siparisler::create([
             'sepet_id'=>auth()->id(),
-            'siparis_tutari'=>Cart::subtotal(),
+            'siparis_tutari'=>Cart::total(),
             'durum'=>'Siparişiniz alındı',
             'adsoyad'=>$request->adsoyad,
             'adres'=>$request->adres,
