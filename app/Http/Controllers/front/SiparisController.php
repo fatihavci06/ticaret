@@ -17,7 +17,9 @@ class SiparisController extends Controller
     public function index()
     {
         //
-       $data= Siparisler::where('sepet_id',auth()->id())->get();
+     
+
+        $data= Siparisler::with('siparisurun')->where('sepet_id',auth()->id())->get();
        
         return view('front.siparisler',['siparisler'=>$data]);
     }

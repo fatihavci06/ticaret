@@ -22,7 +22,7 @@
                 @foreach($siparisler as $siparis)
                 <tr>
                     <td>SP-{{$siparis->id}}</td>
-                    <td>{{ \App\Http\Controllers\front\SiparisController::sepeturunadet($siparis->id) }}</td>
+                    <td>{{$siparis->siparisurun->sum('adet')}}</td>
                     <td>{{$siparis->siparis_tutari}}</td>
                     <td>{{$siparis->durum}}</td>
                     

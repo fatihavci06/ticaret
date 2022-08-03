@@ -16,4 +16,5 @@ class siparisler extends Model
       public function siparisurun(){
         return  $this->hasMany(SiparisUrun::class, 'siparis_id', 'id');
       }
+      
 }
