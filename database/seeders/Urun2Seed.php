@@ -25,6 +25,7 @@ class Urun2Seed extends Seeder
         
         urun::truncate();
         urun_detay::truncate();
+        kategori_urun::truncate();
         
         for ($i = 0; $i < 30; $i++) {
             $urun_adi = $faker->streetName;

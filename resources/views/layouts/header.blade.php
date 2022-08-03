@@ -50,7 +50,7 @@
                     <li class="dropdown text-center">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Profil <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Siparişlerim</a></li>
+                            <li><a href="{{route('front.siparisler')}}">Siparişlerim</a></li>
                             <li role="separator" class="divider"></li>
                             <form action="logout" method="post" >@csrf<li><button class="d-inline btn btn-link p-0">Çıkış</button></li></form>
                         </ul>

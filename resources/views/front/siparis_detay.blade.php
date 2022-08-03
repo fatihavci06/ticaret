@@ -5,43 +5,40 @@
 
  <div class="container">
         <div class="bg-content">
-            <h2>Sipariş (SP-00123)</h2>
+            <h2>Sipariş (SP-{{$siparis_id}})</h2>
             <table class="table table-bordererd table-hover">
                 <tr>
                     <th>Ürün</th>
                     <th>Tutar</th>
                     <th>Adet</th>
-                    <th>Ara Toplam</th>
+                    
                     <th>Durum</th>
                 </tr>
+                @foreach($data as $d)
                 <tr>
-                    <td> <img src="http://lorempixel.com/120/100/food/2"> Ürün adı</td>
-                    <td>18.99</td>
-                    <td>1</td>
-                    <td>18.99</td>
+                    <td> <a href="{{route('front.urun_detay',['slug'=>$d->urunbilgisi->slug])}}" > <img src="http://via.placeholder.com/120x100?text=UrunResmi"></a>{{$d->urunbilgisi->urun_adi}} </td>
+                    <td>{{$d->tutar}}</td>
+                    <td>{{$d->adet}}</td>
+                    
                     <td>
-                        Sipariş alındı, <br> Onaylandı, <br> Kargoya verildi, <br> Bir sorun var. İletişime geçin!
+                        {{$d->durum}}
                     </td>
                 </tr>
+                @endforeach
+            
                 <tr>
                     <th></th>
                     <th></th>
                     <th>Toplam Tutar (KDV Dahil)</th>
-                    <th>18.99</th>
+                    <th>{{$siparis_tutari->siparis_tutari}}</th>
                     <th></th>
                 </tr>
+              
                 <tr>
                     <th></th>
                     <th></th>
-                    <th>Kargo</th>
-                    <th>Ücretsiz</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Sipariş Toplamı</th>
-                    <th>18.99</th>
+                    <th>Sipariş Toplamı  </th>
+                    <th>{{ round(($siparis_tutari->siparis_tutari)/118*100 ,2)}}</th>
                     <th></th>
                 </tr>
 

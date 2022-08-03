@@ -18,8 +18,8 @@ class SiparisController extends Controller
     {
         //
      
-
-        $data= Siparisler::with('siparisurun')->where('sepet_id',auth()->id())->get();
+   
+        $data= Siparisler::with('siparisurun:siparis_id,adet')->where('sepet_id',auth()->id())->get();
        
         return view('front.siparisler',['siparisler'=>$data]);
     }
@@ -39,7 +39,9 @@ class SiparisController extends Controller
     public function siparis_detay($id)
     {
         //
-        return view('front.siparis_detay');
+       $data=SiparisUrun::with('urunbilgisi')->where('siparis_id',$id)->get();
+        $siparis_tutari=Siparisler::select('siparis_tutari')->where('id',$id)->first();
+        return view('front.siparis_detay',['data'=>$data,'siparis_tutari'=>$siparis_tutari,'siparis_id'=>$id]);
     }
 
     /**
