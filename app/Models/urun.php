@@ -21,5 +21,13 @@ class urun extends Model
         return  $this->hasOne(urun_detay::class, 'urun_id', 'id');//user tablosu(model ) içersindeki id alanı post tablosu içerisindeki user ile ilişkilidir
       }
     
+     //modelden içerisinde full_name adında yeni bir kolon oluşturduk(db de değil çektiktek sonra)
+    public function getFullNameAttribute(){ //getFullNameAttribute = yukarıdaappend içerisinde tanımladığımız fullname i büyük harflerle ve başına get sonuna attribute ekleyerek çektik
+        return $this->urun_adi.' ' .$this->slug; //buda dbden gelen first_name ve last_name
+    }
+     protected $casts = [
+        'updated_at' => 'date:Y-m-d',
+        'created_at'=>'date:Y-m-d'
+    ];
       
 }

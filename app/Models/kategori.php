@@ -9,7 +9,7 @@ use App\Models\kategori_urun;
 class kategori extends Model
 {
     use HasFactory, SoftDeletes;
-   
+    protected $guarded=[];
     /*public function urunler(){
         return  $this->hasMany(kategori_urun::class, 'kategori_id', 'id');  
       }*/

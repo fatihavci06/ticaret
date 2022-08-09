@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
+Route::apiResources([
+    'kategoris'=>'App\Http\Controllers\Api\KategoriController',
+    'uruns'=>'App\Http\Controllers\Api\ProductController'
+]);
