@@ -26,6 +26,16 @@ Route::group(['middleware'=>'auth'],function(){
         Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
        
 });
+Route::group(['prefix' => 'yonetim'], function() {
+        Route::redirect('/','/yonetim/oturumac');
+        Route::get('oturumac/','App\Http\Controllers\back\AdminController@oturumac')->name('back.oturumac');
+        Route::post('oturumac/','App\Http\Controllers\back\AdminController@login')->name('back.login');
+        Route::get('oturumukapat/','App\Http\Controllers\back\AdminController@logout')->name('back.logout');
+       
+        Route::group(['middleware' => 'buyoneticimi'], function() {
+                 Route::get('anasayfa/','App\Http\Controllers\back\AdminController@index')->name('back.index');
+        }); 
+    });
 Route::group(['prefix'=>'sepet','middleware'=>'auth'],function(){
         
         Route::get('/','App\Http\Controllers\front\SepetController@index')->name('front.sepet');
