@@ -2,8 +2,8 @@
         <div class="row">
             <div class="col-sm-3 col-md-3 col-lg-2 sidebar collapse" id="sidebar">
                 <div class="list-group">
-                    <a href="#" class="list-group-item">
-                        <span class="fa fa-fw fa-dashboard"></span> Dashboard</a>
+                    <a href="{{route('back.index')}}" class="list-group-item">
+                        <span class="fa fa-fw fa-dashboard"></span> Anasayfa</a>
                     <a href="#" class="list-group-item">
                         <span class="fa fa-fw fa-dashboard"></span> Products
                         <span class="badge badge-dark badge-pill pull-right">14</span>
@@ -13,9 +13,13 @@
 					<a href="#" class="list-group-item">Category</a>
 					<a href="#" class="list-group-item">Category</a>
 				  </div>
-                    <a href="#" class="list-group-item">
-                        <span class="fa fa-fw fa-dashboard"></span> Users
-                        <span class="badge badge-dark badge-pill pull-right">14</span>
+                    <a href="{{route('kullanici.index')}}" class="list-group-item">
+                        <span class="fa fa-fw fa-dashboard"></span> Kullanıcılar
+                        <span class="badge badge-dark badge-pill pull-right">{{ \App\Http\Controllers\back\KullaniciKontroller::kullanici_sayi() }}</span>
+                    </a>
+                    <a href="{{route('kategori.index')}}" class="list-group-item">
+                        <span class="fa fa-fw fa-dashboard"></span> Kategoriler
+                        <span class="badge badge-dark badge-pill pull-right">{{ \App\Http\Controllers\back\KategoriController::kategori_sayi() }}</span>
                     </a>
                     <a href="#" class="list-group-item">
                         <span class="fa fa-fw fa-dashboard"></span> Orders

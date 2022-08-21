@@ -16,7 +16,7 @@
                     <div class="panel-heading">Kategoriler</div>
                     <div class="list-group categories">
                         @foreach($kategoriler as $k)
-                        <a href="{{route('front.kategori',['slug_kategori'=>$k->slug])}}" class="list-group-item"><i class="fa fa-television"></i> {{$k->kategori_adi}}</a>
+                        <a href="{{route('front.kategori',['slug'=>$k->slug])}}" class="list-group-item"><i class="fa fa-television"></i> {{$k->kategori_adi}}</a>
                         @endforeach
                     </div>
                 </div>

@@ -39,11 +39,12 @@ class KategoriController extends Controller
         }
         return $temp_array;
     }
-    public function kategori($slug_kategori,Request $request)
+    public function kategori($slug,Request $request)
     {
       
+
               
-        $kategori=kategori::where('slug',$slug_kategori)->firstOrFail();
+        $kategori=kategori::where('slug',$slug)->firstOrFail();
         if($kategori->ust_id!=''){
             $a=$kategori::where('id',$kategori->ust_id)->firstOrFail();
             $anakategori=$a->kategori_adi;
@@ -57,7 +58,7 @@ class KategoriController extends Controller
             $urunlist=urun::join('urun_detays','urun_detays.urun_id','uruns.id')
             ->join('kategori_uruns','kategori_uruns.urun_id','uruns.id')
             ->join('kategoris','kategoris.id','kategori_uruns.kategori_id')
-            ->where('urun_detays.goster_cok_satan',1)->where('kategoris.slug',$slug_kategori)->orderByDesc('urun_detays.updated_at')->paginate(1);
+            ->where('urun_detays.goster_cok_satan',1)->where('kategoris.slug',$slug)->orderByDesc('urun_detays.updated_at')->paginate(1);
             
             
         }

@@ -19,4 +19,7 @@ class kategori extends Model
       public function kat(){
         return $this->hasMany(kategori::class, 'ust_id', 'id');  
       }
+      public function ust_kategori(){
+        return $this->hasOne(kategori::class, 'id', 'ust_id');  
+      }
 }

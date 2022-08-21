@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/','App\Http\Controllers\front\IndexController@index')->name('front.index');
-Route::get('kategori/{slug_kategori}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
+Route::get('kategori/{slug}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
 Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_detay')->name('front.urun_detay');
 
 
@@ -34,6 +34,32 @@ Route::group(['prefix' => 'yonetim'], function() {
        
         Route::group(['middleware' => 'buyoneticimi'], function() {
                  Route::get('anasayfa/','App\Http\Controllers\back\AdminController@index')->name('back.index');
+
+                 Route::group(['prefix' => 'kullanici'], function() {
+             
+                 Route::get('liste/','App\Http\Controllers\back\KullaniciKontroller@index')->name('kullanici.index');
+                  Route::get('ekle/','App\Http\Controllers\back\KullaniciKontroller@ekle')->name('kullanici.ekle.form');
+                   Route::post('ekle/','App\Http\Controllers\back\KullaniciKontroller@store')->name('kullanici.ekle');
+                 Route::get('duzenle/{id}','App\Http\Controllers\back\KullaniciKontroller@edit')->name('kullanici.edit');
+                 Route::post('guncelle/{id}','App\Http\Controllers\back\KullaniciKontroller@update')->name('kullanici.duzenle');
+                 Route::get('ara/','App\Http\Controllers\back\KullaniciKontroller@ara')->name('kullanici.ara');
+                 Route::get('sil/{id}','App\Http\Controllers\back\KullaniciKontroller@destroy')->name('kullanici.sil');
+                 
+        }); 
+
+                 Route::group(['prefix' => 'kategori'], function() {
+             
+                 Route::get('liste/','App\Http\Controllers\back\KategoriController@index')->name('kategori.index');
+                  Route::get('ekle/','App\Http\Controllers\back\KategoriController@ekle')->name('kategori.ekle.form');
+                   Route::post('ekle/','App\Http\Controllers\back\KategoriController@store')->name('kategori.ekle');
+                 Route::get('duzenle/{id}','App\Http\Controllers\back\KategoriController@edit')->name('kategori.edit');
+                 Route::post('guncelle/{id}','App\Http\Controllers\back\KategoriController@update')->name('kategori.duzenle');
+                 Route::get('ara/','App\Http\Controllers\back\KategoriController@ara')->name('kategori.ara');
+                 Route::get('sil/{id}','App\Http\Controllers\back\KategoriController@destroy')->name('kategori.sil');
+                 
+        }); 
+
+
         }); 
     });
 Route::group(['prefix'=>'sepet','middleware'=>'auth'],function(){

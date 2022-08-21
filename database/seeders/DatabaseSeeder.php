@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             KategoriTableSeeder::class, //bu yapılmalı
            
            Urun2Seed::class,
+           UsersSeed::class
 
          ]);
          DB::statement('SET FOREIGN_KEY_CHECKS=1;');

@@ -6,7 +6,7 @@
          <ol class="breadcrumb">
             <li><a href="{{route('front.index')}}">Anasayfa</a></li>
             @if($anakategori!='')
-            <li class="active"><a href="{{route('front.kategori',['slug_kategori'=>$anakategori_slug])}}">{{$anakategori}}</a></li>
+            <li class="active"><a href="{{route('front.kategori',['slug'=>$anakategori_slug])}}">{{$anakategori}}</a></li>
             @endif
             <li class="active">{{$kategoriadi}}</li>
         </ol>
@@ -20,7 +20,7 @@
                         <h3>Alt Kategoriler {{$anakategori}}</h3>
                         <div class="list-group categories">
                             @foreach($altkategoriler as $a)
-                            <a href="{{route('front.kategori',['slug_kategori'=>$a->slug])}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$a->kategori_adi}}</a>
+                            <a href="{{route('front.kategori',['slug'=>$a->slug])}}" class="list-group-item"><i class="fa fa-arrow-circle-right"></i> {{$a->kategori_adi}}</a>
                             @endforeach
                             
                         </div>
