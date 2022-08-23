@@ -59,6 +59,19 @@ Route::group(['prefix' => 'yonetim'], function() {
                  
         }); 
 
+                  Route::group(['prefix' => 'urun'], function() {
+             
+                 Route::get('liste/','App\Http\Controllers\back\UrunController@index')->name('urun.index');
+                  Route::get('ekle/','App\Http\Controllers\back\UrunController@ekle')->name('urun.ekle.form');
+                   Route::post('ekle/','App\Http\Controllers\back\UrunController@store')->name('urun.ekle');
+                 Route::get('duzenle/{id}','App\Http\Controllers\back\UrunController@edit')->name('urun.edit');
+                 Route::post('guncelle/{id}','App\Http\Controllers\back\UrunController@update')->name('urun.duzenle');
+                 Route::get('ara/','App\Http\Controllers\back\UrunController@ara')->name('urun.ara');
+                 Route::get('sil/{id}','App\Http\Controllers\back\UrunController@destroy')->name('urun.sil');
+                 
+        }); 
+
+
 
         }); 
     });

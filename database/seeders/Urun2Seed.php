@@ -46,11 +46,21 @@ class Urun2Seed extends Seeder
         }
     
         DB::table('kategori_uruns')->truncate();
-        $kategoriler = kategori::all();
-        foreach ($kategoriler as $kategori) {
-            $urunler = urun::pluck('id')->random(30)->all();//urunler tablosundan random 10 veri çek ve id sini all
-            $kategori->urunler()->attach($urunler);//urunler relationuna yani kategori_uruns tablosuna yukarıda çektiğimiz idleri biz burada 10 adet ekledik toplam 10 satır olarak ekler.yani herbir kategoriye 10 ürün eklemiş olduk
+        $urunler=urun::all();
+        foreach($urunler as $urun){
+            
+            $data= kategori::pluck('id');
+               $sayi=$data->count();
+              $anahtar=rand(0, $sayi-1);
+     
+              kategori_urun::insert([
+                    'urun_id'=>$urun->id,
+                    'kategori_id'=> $data[$anahtar],
+                ]);
         }
+       
+
+        
         
         
     }

@@ -4,8 +4,8 @@
                 <div class="list-group">
                     <a href="{{route('back.index')}}" class="list-group-item">
                         <span class="fa fa-fw fa-dashboard"></span> Anasayfa</a>
-                    <a href="#" class="list-group-item">
-                        <span class="fa fa-fw fa-dashboard"></span> Products
+                    <a href="{{route('urun.index')}}" class="list-group-item">
+                        <span class="fa fa-fw fa-dashboard"></span> Urunler
                         <span class="badge badge-dark badge-pill pull-right">14</span>
                     </a>
                     <a href="#" class="list-group-item collapsed" data-target="#submenu1" data-toggle="collapse" data-parent="#sidebar"><span class="fa fa-fw fa-dashboard"></span> Categories<span class="caret arrow"></span></a>

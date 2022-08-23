@@ -18,6 +18,7 @@ class CreateKategorisTable extends Migration
             $table->integer('ust_id')->nullable();
             $table->string('kategori_adi',30);
             $table->string('slug',40);
+            
             $table->softDeletes();
             $table->timestamps();
         });

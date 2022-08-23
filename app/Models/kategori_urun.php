@@ -9,6 +9,7 @@ use App\Models\urun;
 class kategori_urun extends Model
 {
     use HasFactory;
+    protected $guarded=[];
     public function urun_bilgisi(){
         return  $this->hasOne(urun::class, 'id', 'urun_id');  
       }

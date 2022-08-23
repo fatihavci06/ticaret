@@ -5,6 +5,8 @@ namespace App\Http\Controllers\back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\kategori;
+use App\Models\kategori_urun;
+use App\Models\urun;
 use Str;
 class KategoriController extends Controller
 {
@@ -194,9 +196,14 @@ class KategoriController extends Controller
 }
     public function destroy($id)
     {
-        //
+
+
         $data=kategori::find($id);
-        $data->urunler()->detach();
+        $kat=kategori::where('ust_id',$id)->get();
+        foreach($kat as $k){
+            $k->update(['ust_id'=>null]);
+        }
+
 
         $data->delete();
         return redirect()->back()->with('mesaj','silindi');

@@ -18,8 +18,7 @@ class CreateUrunsTable extends Migration
             $table->string('slug',200);
             $table->string('urun_adi',150);
             $table->text('aciklama');
-            $table->decimal('fiyat',6,3);
-            $table->softDeletes();
+            $table->decimal('fiyat',10,3);
             $table->timestamps();
         });
     }
