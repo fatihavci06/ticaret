@@ -43,6 +43,7 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::get('duzenle/{id}','App\Http\Controllers\back\KullaniciKontroller@edit')->name('kullanici.edit');
                  Route::post('guncelle/{id}','App\Http\Controllers\back\KullaniciKontroller@update')->name('kullanici.duzenle');
                  Route::get('ara/','App\Http\Controllers\back\KullaniciKontroller@ara')->name('kullanici.ara');
+
                  Route::get('sil/{id}','App\Http\Controllers\back\KullaniciKontroller@destroy')->name('kullanici.sil');
                  
         }); 
@@ -67,6 +68,7 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::get('duzenle/{id}','App\Http\Controllers\back\UrunController@edit')->name('urun.edit');
                  Route::post('guncelle/{id}','App\Http\Controllers\back\UrunController@update')->name('urun.duzenle');
                  Route::get('ara/','App\Http\Controllers\back\UrunController@ara')->name('urun.ara');
+                   Route::get('altkategori','App\Http\Controllers\back\UrunController@altkategori')->name('kategori.cek');
                  Route::get('sil/{id}','App\Http\Controllers\back\UrunController@destroy')->name('urun.sil');
                  
         }); 

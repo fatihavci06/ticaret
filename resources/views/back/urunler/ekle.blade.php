@@ -4,7 +4,7 @@
 @section('content')
 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 main">
                 <h1 class="sub-header">Ürün Ekle</h1>
-                <form action="{{route('urun.ekle')}}" method="post">
+                <form action="{{route('urun.ekle')}}" method="post" enctype='multipart/form-data'>
                     @if($errors->any())
                     <div class="alert alert-danger">
                         @foreach($errors->all() as $error)
@@ -53,21 +53,29 @@
                    
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="address">Kategori Seçiniz</label>
-                                <select class="form-select form-control" name="ust_id" aria-label="Default select example">
-                                   <option value="0">Seçiniz</option>
-                                 
-                                  <option value="" ></option>
-                                 
+                            <div class="form-group kat" id="kat">
+                                <label for="ust_id">Kategori Seçiniz</label>
+                                <select class="form-select form-control ust_id" id="ust_id" name="ust_id" aria-label="Default select example">
+                                   <option value="">Seçiniz</option>
+                                 @foreach($kategoriler as $k)
+                                  <option value="{{$k->id}}" >{{$k->kategori_adi}}</option>
+                                 @endforeach
                                 </select>
 
                             </div>
                         </div>
+
+                         <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="image">Resim</label>
+                                <input type="file"  id="image" name="image[]" class="form-control" multiple="multiple" >
+                            </div>
+                          </div>
                         
                     </div>
-                   <div class="row">
-                        <div class="col-md-6">
+                   <div class="row mt-2" style="margin-top:20px;">
+
+                        <div class="col-md-12">
                              <button type="submit" class="btn btn-primary form-control">Ekle</button>
                         </div>
                         
@@ -78,4 +86,59 @@
                
 
             </div>
+@endsection
+@section('js')
+  <script>
+$(document).on('change','.ust_id',function(e) {
+    
+        var id=$(this).val();
+       
+        var myarray = '<label for="ust_id">Kategori Seçiniz</label><select class="form-select form-control ust_id" id="ust_id" name="ust_id" aria-label="Default select example">';
+        
+      
+       
+        $.ajax({
+           type:'get',
+
+           url:"{{ route('kategori.cek') }}",
+
+           data:{id:id},
+
+           success:function(data){
+              console.log(data);
+
+              
+            if(data.count>0){
+              myarray+='<option>Seçiniz</option>';
+            }
+            else{
+              return false;
+            }
+            $.each( data.altkategoriler, function( key, value ) {
+              console.log(value);
+               if(data.count==0){
+                alert('boş');
+              }
+              else{
+                 myarray+='<option value="'+value.id+'">'+value.kategori_adi+'</option>';
+              }
+             
+            
+             
+
+        });
+             myarray+='</select>';
+              $('.kat').html(myarray);
+            
+           
+
+           }
+
+        });
+      
+      
+    });
+
+
+</script>
 @endsection
