@@ -14,12 +14,17 @@
         <div class="products bg-content">
                     
                     <div class="row">
+
                         @if(count($urunler)==0)
                         Bu kategoride ürün bulunmuyor.
                         @endif
                         @foreach($urunler as $u)
+
+                         @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($u->id);
+                            @endphp
                         <div class="col-md-3 product mb-3">
-                            <a href="#"><img src="http://via.placeholder.com/400x400?text=UrunResmi"></a>
+                            <a href="#"><img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif></a>
                             <p><a href="{{route('front.urun_detay',['slug'=>$u->slug])}}">{!!$u->urun_adi!!}</a></p>
                             <p class="price">{{$u->fiyat}}</p>
                             <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>

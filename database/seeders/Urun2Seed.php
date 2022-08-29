@@ -37,7 +37,7 @@ class Urun2Seed extends Seeder
             ]);
             
             $detay = $urun->detay()->create([
-                'goster_slider'=>rand(0,1),
+                'goster_slider'=>0,
                 'goster_gunun_firsati'=>rand(0,1),
                 'goster_one_cikan'=>rand(0,1),
                 'goster_cok_satan'=>rand(0,1),

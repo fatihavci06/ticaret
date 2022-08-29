@@ -43,7 +43,10 @@
                         @endif
                         @foreach($urunler as $u)
                         <div class="col-md-3 product">
-                            <a href="#"><img src="http://via.placeholder.com/100x200?text=UrunResmi"></a>
+                            @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($u->id);
+                            @endphp
+                            <a href="#"><img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif ></a>
                             <p><a href="{{route('front.urun_detay',['slug'=>$u->slug])}}">{!!$u->urun_adi!!}</a></p>
                             <p class="price">{{$u->fiyat}}</p>
                             <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>

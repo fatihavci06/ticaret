@@ -18,7 +18,7 @@ Route::get('/','App\Http\Controllers\front\IndexController@index')->name('front.
 Route::get('kategori/{slug}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
 Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_detay')->name('front.urun_detay');
 
-
+Route::get('fotocek','App\Http\Controllers\front\KategoriController@fotocek')->name('front.fotocek');
 Route::group(['middleware'=>'auth'],function(){
         Route::get('odeme/','App\Http\Controllers\front\OdemeController@index')->name('front.odeme');
         Route::post('odemeyap/','App\Http\Controllers\front\OdemeController@odemeyap')->name('front.odemeyap');
@@ -70,6 +70,19 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::get('ara/','App\Http\Controllers\back\UrunController@ara')->name('urun.ara');
                    Route::get('altkategori','App\Http\Controllers\back\UrunController@altkategori')->name('kategori.cek');
                  Route::get('sil/{id}','App\Http\Controllers\back\UrunController@destroy')->name('urun.sil');
+                 
+        }); 
+
+                   Route::group(['prefix' => 'siparis'], function() {
+             
+                 Route::get('liste/','App\Http\Controllers\back\SiparisController@index')->name('back.siparis.index');
+                  Route::get('ekle/','App\Http\Controllers\back\SiparisController@ekle')->name('back.siparis.ekle.form');
+                   Route::post('ekle/','App\Http\Controllers\back\SiparisController@store')->name('back.siparis.ekle');
+                 Route::get('duzenle/{id}','App\Http\Controllers\back\SiparisController@edit')->name('back.siparis.edit');
+                 Route::post('guncelle/{id}','App\Http\Controllers\back\SiparisController@update')->name('back.siparis.duzenle');
+                 Route::get('ara/','App\Http\Controllers\back\SiparisController@ara')->name('siparis.ara');
+                   Route::get('altkategori','App\Http\Controllers\back\SiparisController@altkategori')->name('back.kategori.cek');
+                 Route::get('sil/{id}','App\Http\Controllers\back\SiparisController@destroy')->name('back.siparis.sil');
                  
         }); 
 

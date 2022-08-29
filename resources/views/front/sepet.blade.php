@@ -24,7 +24,7 @@
                 @foreach($sepet as $s)
                 <tr>
                 
-                    <td> <img src="http://via.placeholder.com/120x100?text=UrunResmi"> <a href="{{route('front.urun_detay',['slug'=>$s->options->slug])}}">{{$s->name}}</a></td>
+                    <td>  <a href="{{route('front.urun_detay',['slug'=>$s->options->slug])}}">{{$s->name}}</a></td>
                     <td>{{$s->price}}</td>
                     <td>
                         <a href="#" class="btn btn-xs btn-default urun-adet-azalt" data-id="{{$s->rowId}}" data-urun_id="{{$s->options->urun_id}}" data-adet="{{$s->qty-1}}">-</a>

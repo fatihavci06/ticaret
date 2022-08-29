@@ -8,6 +8,7 @@ use App\Models\urun;
 use App\Models\kategori;
 use App\Models\kategori_urun;
 use App\Models\Image;
+use App\Models\urun_detay;
  use Illuminate\Support\Facades\Storage;
 use Str;
 class UrunController extends Controller
@@ -17,6 +18,12 @@ class UrunController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public static function urun_sayi(){ //dışarıdan fonksiyonun çağrılabilmesi için mutlaka public static olmalı
+       return urun::count();
+            
+        }
+        
     public function index()
     {
         //
@@ -83,7 +90,7 @@ class UrunController extends Controller
     {
         //
 
-       
+
         if(empty($request->slug)){
              $slug=Str::slug($request->urun_adi);
              $request->merge(['slug' => $slug]);
@@ -99,7 +106,9 @@ class UrunController extends Controller
             'fiyat' => 'required',
              'aciklama' => 'required',
             'slug' => "unique:uruns,slug",
-            'ust_id'=>'required'
+            'ust_id'=>'required',
+             'image' => 'required',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
            
            ]);
 
@@ -112,13 +121,21 @@ class UrunController extends Controller
         $data->fiyat=$request->fiyat;
         $data->save();
 
+         $urun_detay=new urun_detay;
+         $urun_detay->urun_id=$data->id;
+         $urun_detay->goster_slider=$request->goster_slider;
+         $urun_detay->goster_gunun_firsati=$request->goster_slider;
+         $urun_detay->goster_one_cikan=$request->goster_one_cikan;
+         $urun_detay->goster_cok_satan=$request->goster_cok_satan;
+         $urun_detay->goster_indirimli=$request->goster_indirimli;
+         
+         $urun_detay->save();
         if(!empty($request->file('image'))){
 
             foreach($request->file('image') as $file){
                 $img=new Image;
                 $img->image=Storage::putFile('images', $file);  //storage burda
                 $img->urun_id=$data->id;
-                $img->kapakfotomu=1;
                 $img->save();
             }
             
@@ -161,6 +178,12 @@ class UrunController extends Controller
     public function edit($id)
     {
         //
+       
+       $data=urun::with('detay')->findOrFail($id);
+       
+
+       $kategorisi=kategori_urun::with('kategori_bilgisi')->where('urun_id',$id)->first();
+        return view('back.urunler.edit',['data'=>$data,'kategorisi'=>$kategorisi]);
     }
 
     /**
@@ -173,6 +196,69 @@ class UrunController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(empty($request->slug)){
+             $slug=Str::slug($request->urun_adi);
+             $request->merge(['slug' => $slug]);
+        }
+        else{
+            $slug=Str::slug($request->slug);
+            $request->merge(['slug' => $slug]);
+        }
+       
+        $request->validate([
+            
+            'urun_adi' => 'required',
+            'fiyat' => 'required',
+             'aciklama' => 'required',
+            'slug' => "unique:uruns,slug,{$id}",
+            'ust_id'=>'required',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
+           
+           ]);
+
+
+        $data=urun::findOrFail($id);
+        $data->urun_adi=$request->urun_adi;
+        $data->slug=$slug;
+        
+        $data->aciklama=$request->aciklama;
+        $data->fiyat=$request->fiyat;
+        $data->save();
+
+         $urun_detay=urun_detay::where('urun_id',$id)->first();
+         $urun_detay->goster_slider=$request->goster_slider;
+         $urun_detay->goster_gunun_firsati=$request->goster_slider;
+         $urun_detay->goster_one_cikan=$request->goster_one_cikan;
+         $urun_detay->goster_cok_satan=$request->goster_cok_satan;
+         $urun_detay->goster_indirimli=$request->goster_indirimli;
+         
+         $urun_detay->save();
+        if(!empty($request->file('image'))){
+
+            $image=Image::where('urun_id',$id)->get();
+            foreach($image as $i){
+                Storage::delete($i->image);
+                $i->delete();
+            }
+
+            foreach($request->file('image') as $file){
+                $img=new Image;
+                $img->image=Storage::putFile('images', $file);  //storage burda
+                $img->urun_id=$data->id;
+                $img->save();
+            }
+            
+        }
+
+        
+
+        
+        $ku=kategori_urun::where('urun_id',$id)->first();
+            $ku->kategori_id=$request->ust_id;
+            $ku->urun_id=$id;
+            $ku->save();
+        return redirect()->back()->with('mesaj','eklendi');
+
     }
 
     /**
@@ -184,6 +270,11 @@ class UrunController extends Controller
     public function destroy($id)
     {
         //
+
+        $foto=Image::where('urun_id',$id)->get();
+        foreach($foto as $f){
+             Storage::delete($f->image);
+        }
         $data=urun::find($id);
         $data->delete();
      

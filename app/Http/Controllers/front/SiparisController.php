@@ -39,9 +39,10 @@ class SiparisController extends Controller
     public function siparis_detay($id)
     {
         //
-       $data=SiparisUrun::with('urunbilgisi')->where('siparis_id',$id)->get();
+      $data=SiparisUrun::with('urunbilgisi.images')->where('siparis_id',$id)->get();
+      $durum=Siparisler::select('durum')->find($id);
         $siparis_tutari=Siparisler::select('siparis_tutari')->where('id',$id)->first();
-        return view('front.siparis_detay',['data'=>$data,'siparis_tutari'=>$siparis_tutari,'siparis_id'=>$id]);
+        return view('front.siparis_detay',['data'=>$data,'siparis_tutari'=>$siparis_tutari,'siparis_id'=>$id,'durum'=>$durum->durum]);
     }
 
     /**

@@ -30,7 +30,7 @@ class UrunController extends Controller
     public function urun_detay($slug)
     {
         //
-        $urun=urun::with('kategoriler')->where('slug',$slug)->firstOrFail();
+        $urun=urun::with(['kategoriler','images'])->where('slug',$slug)->firstOrFail();
         
         return view('front.urun_detay',['urun'=>$urun]);
     }

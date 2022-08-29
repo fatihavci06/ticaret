@@ -22,7 +22,7 @@
                 <div class="table-responsive">
                     <div class="row">
                         <div class="col-lg-8">
-                            <form action="{{route('urun.ara')}}" method="get">
+                            <form action="{{route('siparis.ara')}}" method="get">
                                 
                             <input type="text" name="ara" placeholder="Ara" value="{{old('ara')}}">
                            <button type="submit" class="btn btn-primary">Ara</button>
@@ -40,10 +40,9 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Ürün Adı</th>
-                                <th>Kategori</th>
-                                <th>Fiyat</th>
-                                <th>Slug</th>
+                                <th>Ad Soyad</th>
+                                <th>Tutar</th>
+                                <th>Durum</th>
                                 <th>Tarih</th>
                                 <th>İşlem</th>
                             </tr>
@@ -52,16 +51,15 @@
                             @foreach($data as $d)
                             <tr>
                                 <td>{{$d->id}}</td>
-                                <td>{{$d->urun_adi}}</td>
-                                <td>{{$d->kategori_adi}}</td>
-                                 <td>{{$d->fiyat}}</td>
-                                <td>{{$d->slug}}</td>
+                                <td>{{$d->adsoyad}}</td>
+                                <td>{{$d->siparis_tutari}}</td>
+                                 <td>{{$d->durum}}</td>
                                 <td>{{$d->created_at}}</td>
                                 <td style="width: 100px">
-                                    <a href="{{route('urun.edit',['id'=>$d->id])}}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                    <a href="{{route('back.siparis.edit',['id'=>$d->id])}}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                         <span class="fa fa-pencil"></span>
                                     </a>
-                                    <a href="{{route('urun.sil',['id'=>$d->id])}}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onclick="return confirm('Are you sure?')">
+                                    <a href="{{route('back.siparis.sil',['id'=>$d->id])}}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onclick="return confirm('Are you sure?')">
                                         <span class="fa fa-trash"></span>
                                     </a>
                                 </td>

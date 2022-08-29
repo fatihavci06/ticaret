@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\kategori;
 use App\Models\urun;
 use App\Models\kategori_urun;
+use App\Models\Image;
 
 class KategoriController extends Controller
 {
@@ -39,6 +40,12 @@ class KategoriController extends Controller
         }
         return $temp_array;
     }
+
+   public static function fotocek($id=37){
+       $data=Image::select('image')->where('urun_id',$id)->first();
+        return $data;
+
+    }
     public function kategori($slug,Request $request)
     {
       
@@ -69,6 +76,7 @@ class KategoriController extends Controller
         } 
         else{
             $urunlist= $kategori->urunler()->paginate(2);
+
         } 
         
         

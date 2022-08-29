@@ -58,7 +58,7 @@ class OdemeController extends Controller
                 'urun_id'=>$s->urun_id,
                 'adet'=>$s->adet,
                 'tutar'=>$s->tutar,
-                'durum'=>'Tamamlandı',
+                'durum'=>'Sipariş Oluşturuldu',
                 'siparis_id'=>$siparis->id
             ]);
 

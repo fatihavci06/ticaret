@@ -16,12 +16,12 @@
                 </tr>
                 @foreach($data as $d)
                 <tr>
-                    <td> <a href="{{route('front.urun_detay',['slug'=>$d->urunbilgisi->slug])}}" > <img src="http://via.placeholder.com/120x100?text=UrunResmi"></a>{{$d->urunbilgisi->urun_adi}} </td>
+                    <td> <a href="{{route('front.urun_detay',['slug'=>$d->urunbilgisi->slug])}}" >@if(isset($d->urunbilgisi->images[0]->image)) <img src="{{Storage::url($d->urunbilgisi->images[0]->image)}}" width="50px" height="50px">@endif</a>{{$d->urunbilgisi->urun_adi}} </td>
                     <td>{{$d->tutar}}</td>
                     <td>{{$d->adet}}</td>
                     
                     <td>
-                        {{$d->durum}}
+                        {{$durum}}
                     </td>
                 </tr>
                 @endforeach

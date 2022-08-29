@@ -4,7 +4,11 @@ namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Siparisler;
+use App\Models\Urun;
+use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\Cache;
 class AdminController extends Controller
 {
     /**
@@ -26,7 +30,17 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return view('back.index');
+    $bitiszamani=now()->addMinutes(10);
+    $istatistikler=Cache::remember('istatistikler',$bitiszamani,function(){
+      return   $istatistikler=[
+         'bekleyen'=>$bekleyen=Siparisler::where('durum','Siparişiniz alındı')->count(),
+       'tamamlanan'=> $tamamlanan=Siparisler::where('durum','Sipariş Tamamlandı')->count(),
+        'urunsayisi'=>$urunsayisi=Urun::count(),
+        'kullanici'=>$kullanici=User::count()
+         ];
+});
+   
+        return view('back.index',['istatistikler'=>$istatistikler]);
     }
 
     /**

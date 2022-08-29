@@ -24,6 +24,9 @@ class urun extends Model
       public function detay(){
         return  $this->hasOne(urun_detay::class, 'urun_id', 'id');//user tablosu(model ) içersindeki id alanı post tablosu içerisindeki user ile ilişkilidir
       }
+      public function images(){
+        return  $this->hasMany(Image::class, 'urun_id', 'id');//user tablosu(model ) içersindeki id alanı post tablosu içerisindeki user ile ilişkilidir
+      }
     
      //modelden içerisinde full_name adında yeni bir kolon oluşturduk(db de değil çektiktek sonra)
     public function getFullNameAttribute(){ //getFullNameAttribute = yukarıdaappend içerisinde tanımladığımız fullname i büyük harflerle ve başına get sonuna attribute ekleyerek çektik

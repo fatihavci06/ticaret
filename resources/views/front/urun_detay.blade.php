@@ -12,19 +12,16 @@
         </ol>
         <div class="bg-content">
             <div class="row">
-                <div class="col-md-5">
-                    <img src="http://via.placeholder.com/400x200?text=UrunResmi">
+                <div class="col-md-5" >
+                    <img style="width:200px;height:300px;" @if(!empty($urun->images[0]->image)) src="{{Storage::url($urun->images[0]->image)}}" @endif>
                     <hr>
                     <div class="row">
+                        @foreach($urun->images as $uı)
                         <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="http://via.placeholder.com/400x400?text=UrunResmi"></a>
+                            <a href="#" class="thumbnail"><img src="{{Storage::url($uı->image)}}"></a>
                         </div>
-                        <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="http://via.placeholder.com/400x400?text=UrunResmi2"></a>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="#" class="thumbnail"><img src="http://via.placeholder.com/400x400?text=UrunResmi"></a>
-                        </div>
+                        @endforeach
+                        
                     </div>
                 </div>
                 <div class="col-md-7">

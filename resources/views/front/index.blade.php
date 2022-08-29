@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
                     <ol class="carousel-indicators">
                         
                         @foreach($slider as $s)
@@ -33,8 +33,12 @@
                     <div class="carousel-inner" role="listbox">
                     
                     @foreach($slider as $s)
+                    @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($s->urun_id);
+                            @endphp
+                   
                         <div class="item @if($slider[0]->id==$s->id) active @endif">
-                            <img src="http://via.placeholder.com/640x400?text=UrunResmi" alt="...">
+                            <img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif alt="..." style="    width: 550px;">
                             <div class="carousel-caption">
                                 {{$s->urun->urun_adi}}
                             </div>
@@ -54,10 +58,12 @@
             <div class="col-md-3">
                 <div class="panel panel-default" id="sidebar-product">
                     <div class="panel-heading">{{$gunun_firsati->urun_adi}} - Günün Fırsatı </div>
-                   
+                   @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($gunun_firsati->urun_id);
+                            @endphp
                     <div class="panel-body">
                         <a href="{{route('front.urun_detay',['slug'=>$gunun_firsati->slug])}}">
-                            <img src="http://via.placeholder.com/400x485?text=UrunResmi" class="img-responsive">
+                            <img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif  style="max-height:280px;" class="img-responsive">
                             
                         </a>
                     </div>
@@ -72,8 +78,11 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach($one_cikan as $o)
+                        @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($o->urun_id);
+                            @endphp
                         <div class="col-md-3 product">
-                            <a href="{{route('front.urun_detay',['slug'=>$o->slug])}}"><img src="http://via.placeholder.com/400x400?text=UrunResmi"></a>
+                            <a href="{{route('front.urun_detay',['slug'=>$o->slug])}}"><img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif ></a>
                             <p><a href="{{route('front.urun_detay',['slug'=>$o->slug])}}">{{$o->urun_adi}}</a></p>
                             <p class="price">{{$o->fiyat}} ₺</p>
                         </div>
@@ -89,9 +98,12 @@
                 <div class="panel-body">
                 <div class="row">
                         @foreach($cok_satan as $c)
+                         @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($c->urun_id);
+                            @endphp
                         <div class="col-md-3 product">
-                            <a href="{{route('front.urun_detay',['slug'=>$c->slug])}}"><img src="http://via.placeholder.com/400x400?text=UrunResmi"></a>
-                            <p><a href="{{route('front.urun_detay',['slug'=>$c->slug])}}">{{$o->urun_adi}}</a></p>
+                            <a href="{{route('front.urun_detay',['slug'=>$c->slug])}}"><img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif ></a>
+                            <p><a href="{{route('front.urun_detay',['slug'=>$c->slug])}}">{{$c->urun_adi}}</a></p>
                             <p class="price">{{$c->fiyat}} ₺</p>
                         </div>
                         @endforeach
@@ -105,8 +117,14 @@
                 <div class="panel-body">
                 <div class="row">
                         @foreach($indirimli as $o)
+                        @php
+                            $data=\App\Http\Controllers\front\KategoriController::fotocek($o->urun_id);
+                            @endphp
                         <div class="col-md-3 product">
-                            <a href="{{route('front.urun_detay',['slug'=>$o->slug])}}"><img src="http://via.placeholder.com/400x400?text=UrunResmi"></a>
+                            <a href="{{route('front.urun_detay',['slug'=>$o->slug])}}">
+                                
+                                <img @if(!empty($data->image)) src="{{Storage::url($data->image)}}"  @endif >
+                            </a>
                             <p><a href="{{route('front.urun_detay',['slug'=>$o->slug])}}">{{$o->urun_adi}}</a></p>
                             <p class="price">{{$o->fiyat}} ₺</p>
                         </div>
