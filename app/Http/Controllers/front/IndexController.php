@@ -17,6 +17,7 @@ class IndexController extends Controller
      */
     public function index()
     {   
+       
         $slider=urun_detay::with('urun')->where('goster_slider',1)->take(5)->get();
         
         $kategoriler=kategori::whereNull('ust_id')->take(5)->get(); //null olan kayıtları döndürür

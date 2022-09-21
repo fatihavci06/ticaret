@@ -5,9 +5,11 @@ namespace App\Http\Controllers\back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Siparisler;
+use App\Models\SiparisUrun;
 use App\Models\Urun;
 use App\Models\User;
 use Auth;
+use DB;
 use Illuminate\Support\Facades\Cache;
 class AdminController extends Controller
 {
@@ -30,6 +32,42 @@ class AdminController extends Controller
     public function index()
     {
         //
+
+
+
+
+ $coksatan=DB::table('siparis_uruns as su')
+        ->selectRaw('su.siparis_id,u.urun_adi, sum(su.adet) as urunadet')
+        ->join('siparislers as s','s.id','=','su.siparis_id')
+        ->join('uruns as u','u.id','=','su.urun_id')
+        ->groupBy('su.urun_id')
+        ->orderBy('urunadet','desc')
+        ->get();
+
+
+   $ay=DB::table('siparis_uruns as su')
+->select(DB::raw('sum(adet) as `data`'), DB::raw("DATE_FORMAT(su.created_at, '%m-%Y') new_date"),  DB::raw('YEAR(su.created_at) year, MONTH(created_at) month'))
+->groupby('month')
+->get();
+
+
+foreach ($ay as $row ) {
+    $data2['label2'][] = $row->month.'-'.$row->year;
+        $data2['data2'][] = (int) $row->data;
+}
+    
+
+ $data2['chart_ay'] = json_encode($data2);
+
+
+
+
+        foreach($coksatan as $row) {
+        $data['label'][] = $row->urun_adi;
+        $data['data'][] = (int) $row->urunadet;
+      }
+$data['chart_data'] = json_encode($data);
+     
     $bitiszamani=now()->addMinutes(10);
     $istatistikler=Cache::remember('istatistikler',$bitiszamani,function(){
       return   $istatistikler=[
@@ -39,8 +77,10 @@ class AdminController extends Controller
         'kullanici'=>$kullanici=User::count()
          ];
 });
-   
-        return view('back.index',['istatistikler'=>$istatistikler]);
+
+
+        
+        return view('back.index', ['istatistikler'=>$istatistikler,'chart_data'=>$data['chart_data'],'data2'=> $data2['chart_ay']]);
     }
 
     /**

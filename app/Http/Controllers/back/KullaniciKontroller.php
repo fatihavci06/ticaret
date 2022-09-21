@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use App\Events\YeniUyeEvent;
 class KullaniciKontroller extends Controller
 {
     /**
@@ -71,6 +72,7 @@ class KullaniciKontroller extends Controller
         $user->password=bcrypt($request->password);
         $user->yoneticimi=$request->yoneticimi;
         $user->save();
+        event(new YeniUyeEvent($user));
         return redirect()->back()->with('mesaj','Kayıt başarılı');
     }
 
