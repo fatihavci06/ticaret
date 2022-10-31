@@ -1,30 +1,49 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
-    },
-    "devDependencies": {
-        "@popperjs/core": "^2.10.2",
-        "axios": "^0.21.4",
-        "bootstrap": "^5.1.3",
-        "laravel-mix": "^6.0.49",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "resolve-url-loader": "^5.0.0",
-        "sass": "^1.32.11",
-        "sass-loader": "^11.0.1"
-    },
-    "dependencies": {
-        "autoprefixer": "10.4.5",
-        "bootstrap": "^5.1.3",
-        "popper.js": "^1.16.1",
-        "sass": "^1.52.3",
-        "sass-loader": "^13.0.0"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.10.2",
+    "axios": "^0.21.4",
+    "bootstrap": "^5.1.3",
+    "laravel-mix": "^6.0.49",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1"
+  },
+  "dependencies": {
+    "autoprefixer": "10.4.5",
+    "bootstrap": "^5.1.3",
+    "popper.js": "^1.16.1",
+    "sass": "^1.52.3",
+    "sass-loader": "^13.0.0",
+    "socket.io": "^4.5.3"
+  },
+  "name": "testapp",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
+  "version": "1.0.0",
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fatihavci06/ticaret.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fatihavci06/ticaret/issues"
+  },
+  "homepage": "https://github.com/fatihavci06/ticaret#readme"
 }
