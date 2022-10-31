@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * ATTENTION: An "eval-source-map" devtool has been used.
  * This devtool is neither made for production nor for readable output files.
@@ -1206,3 +1207,14 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","/var/www/html/testapp"]]
 /******/ 	
 /******/ })()
 ;
+=======
+const server = require('http').createServer();
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+    console.log('sockete birileri bağlandı.');
+    socket.on('disconnect', function(){
+        console.log('birileri geldi ve gitti.');
+    });
+})
+>>>>>>> d040cbaa38fe88192ff84859eb1dd566b6998553

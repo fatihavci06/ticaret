@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\front;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\urun;
 
-class UrunController extends Controller
+class SocketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,7 @@ class UrunController extends Controller
     public function index()
     {
         //
-
-
-
-        return $urunler = urun::pluck('id')->random(10)->all();
+        return view('socket');
     }
 
     /**
@@ -27,14 +22,10 @@ class UrunController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function urun_detay($slug)
+    public function create()
     {
         //
-        $urun=urun::with(['kategoriler','images'])->where('slug',$slug)->firstOrFail();
-
-        return view('front.urun_detay',['urun'=>$urun]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -42,13 +33,9 @@ class UrunController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function store(Request $request)
     {
         //
-        $aranan=$request->aranan;
-        $data=urun::where('urun_adi','like','%'.$aranan.'%')->orWhere('aciklama','like','%'.$aranan.'%')->paginate(2);
-        $request->flash();// sessiona attı ve front endde {{old('aranan')}} ile inputa son değerin yazmasını sağladık
-        return view('front.arama',['urunler'=>$data]);
     }
 
     /**

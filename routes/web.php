@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/socket','App\Http\Controllers\SocketController@index')->name('socket.index');
 Route::get('/','App\Http\Controllers\front\IndexController@index')->name('front.index');
 Route::get('kategori/{slug}','App\Http\Controllers\front\KategoriController@kategori')->name('front.kategori');
 Route::get('urun-detay/{slug}','App\Http\Controllers\front\UrunController@urun_detay')->name('front.urun_detay');
@@ -24,19 +24,19 @@ Route::group(['middleware'=>'auth'],function(){
         Route::post('odemeyap/','App\Http\Controllers\front\OdemeController@odemeyap')->name('front.odemeyap');
         Route::get('siparisler/','App\Http\Controllers\front\SiparisController@index')->name('front.siparisler');
         Route::get('siparisler/{id}','App\Http\Controllers\front\SiparisController@siparis_detay')->name('front.siparis_detay');
-       
+
 });
 Route::group(['prefix' => 'yonetim'], function() {
         Route::redirect('/','/yonetim/oturumac');
         Route::get('oturumac/','App\Http\Controllers\back\AdminController@oturumac')->name('back.oturumac');
         Route::post('oturumac/','App\Http\Controllers\back\AdminController@login')->name('back.login');
         Route::get('oturumukapat/','App\Http\Controllers\back\AdminController@logout')->name('back.logout');
-       
+
         Route::group(['middleware' => 'buyoneticimi'], function() {
                  Route::get('anasayfa/','App\Http\Controllers\back\AdminController@index')->name('back.index');
 
                  Route::group(['prefix' => 'kullanici'], function() {
-             
+
                  Route::get('liste/','App\Http\Controllers\back\KullaniciKontroller@index')->name('kullanici.index');
                   Route::get('ekle/','App\Http\Controllers\back\KullaniciKontroller@ekle')->name('kullanici.ekle.form');
                    Route::post('ekle/','App\Http\Controllers\back\KullaniciKontroller@store')->name('kullanici.ekle');
@@ -45,11 +45,11 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::get('ara/','App\Http\Controllers\back\KullaniciKontroller@ara')->name('kullanici.ara');
 
                  Route::get('sil/{id}','App\Http\Controllers\back\KullaniciKontroller@destroy')->name('kullanici.sil');
-                 
-        }); 
+
+        });
 
                  Route::group(['prefix' => 'kategori'], function() {
-             
+
                  Route::get('liste/','App\Http\Controllers\back\KategoriController@index')->name('kategori.index');
                   Route::get('ekle/','App\Http\Controllers\back\KategoriController@ekle')->name('kategori.ekle.form');
                    Route::post('ekle/','App\Http\Controllers\back\KategoriController@store')->name('kategori.ekle');
@@ -57,11 +57,11 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::post('guncelle/{id}','App\Http\Controllers\back\KategoriController@update')->name('kategori.duzenle');
                  Route::get('ara/','App\Http\Controllers\back\KategoriController@ara')->name('kategori.ara');
                  Route::get('sil/{id}','App\Http\Controllers\back\KategoriController@destroy')->name('kategori.sil');
-                 
-        }); 
+
+        });
 
                   Route::group(['prefix' => 'urun'], function() {
-             
+
                  Route::get('liste/','App\Http\Controllers\back\UrunController@index')->name('urun.index');
                   Route::get('ekle/','App\Http\Controllers\back\UrunController@ekle')->name('urun.ekle.form');
                    Route::post('ekle/','App\Http\Controllers\back\UrunController@store')->name('urun.ekle');
@@ -70,11 +70,11 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::get('ara/','App\Http\Controllers\back\UrunController@ara')->name('urun.ara');
                    Route::get('altkategori','App\Http\Controllers\back\UrunController@altkategori')->name('kategori.cek');
                  Route::get('sil/{id}','App\Http\Controllers\back\UrunController@destroy')->name('urun.sil');
-                 
-        }); 
+
+        });
 
                    Route::group(['prefix' => 'siparis'], function() {
-             
+
                  Route::get('liste/','App\Http\Controllers\back\SiparisController@index')->name('back.siparis.index');
                   Route::get('ekle/','App\Http\Controllers\back\SiparisController@ekle')->name('back.siparis.ekle.form');
                    Route::post('ekle/','App\Http\Controllers\back\SiparisController@store')->name('back.siparis.ekle');
@@ -83,15 +83,15 @@ Route::group(['prefix' => 'yonetim'], function() {
                  Route::get('ara/','App\Http\Controllers\back\SiparisController@ara')->name('siparis.ara');
                    Route::get('altkategori','App\Http\Controllers\back\SiparisController@altkategori')->name('back.kategori.cek');
                  Route::get('sil/{id}','App\Http\Controllers\back\SiparisController@destroy')->name('back.siparis.sil');
-                 
-        }); 
+
+        });
 
 
 
-        }); 
+        });
     });
 Route::group(['prefix'=>'sepet','middleware'=>'auth'],function(){
-        
+
         Route::get('/','App\Http\Controllers\front\SepetController@index')->name('front.sepet');
         Route::post('/guncelle/{id}','App\Http\Controllers\front\SepetController@guncelle')->name('front.sepet_guncelle');
         Route::post('/ekle','App\Http\Controllers\front\SepetController@ekle')->name('front.sepete_ekle');
