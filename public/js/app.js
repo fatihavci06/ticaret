@@ -6,4 +6,5 @@ io.on('connection', function(socket){
     socket.on('disconnect', function(){
         console.log('birileri geldi ve gitti.');
     });
-})
+});
+server.listen(5000);
