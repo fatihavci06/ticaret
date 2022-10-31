@@ -112,10 +112,10 @@ class KullaniciKontroller extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user=User::findOrFail($id);
+        $user_id=$request->user_id;
          $request->validate([
             
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:users,email,'.$user_id,
             'name'=>'required',
             'isAktive'=>'required',
             'yoneticimi'=>'required',

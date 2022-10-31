@@ -16,9 +16,9 @@ class UrunController extends Controller
     public function index()
     {
         //
-        
-        
-        
+
+
+
         return $urunler = urun::pluck('id')->random(10)->all();
     }
 
@@ -31,7 +31,7 @@ class UrunController extends Controller
     {
         //
         $urun=urun::with(['kategoriler','images'])->where('slug',$slug)->firstOrFail();
-        
+
         return view('front.urun_detay',['urun'=>$urun]);
     }
 

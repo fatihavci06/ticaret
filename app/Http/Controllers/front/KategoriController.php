@@ -21,8 +21,10 @@ class KategoriController extends Controller
         //
     }
     public function ana_kategori($slug){
+        return 's';
         $data=kategori::whereSlug($slug)->firstOrFail();
-        $tumurunler=kategori_urun::with('urun_bilgisi')->where('kategori_id',$data->id)->get();
+        $tumurunler=kategori_urun::with('urun_bilgisi')->where('kategori_id',$data->id)->tosql();
+        dd($tumurunler);
         $altkategoriurunler=kategori::with('kat.urunler')->where('id',$data->id)->get();
         return $altkategoriurunler;
     }
