@@ -13,7 +13,7 @@ s
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-    var socket = io('http://188.166.43.102:5000/:5000');
+    var socket = io('http://188.166.43.102:5000');
 
 // socket'te ki posts event'ını dinliyoruz, gelirse konsola yazdırıp bakacağız
 socket.on('posts', function (data) {
